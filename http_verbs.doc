@@ -1,0 +1,6 @@
+Main HTTP verbs and what they are meant for:
+ - POST - to create new data
+ - GET - to read data
+ - PUT - to update/replace data
+ - PATCH - to update/modify data
+ - DELETE - to delete data

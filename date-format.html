@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>CrossKnowledge - Code challenge</title>
+</head>
+<body">
+  <script>
+    // This will create elements for testing every second
+    // Don't change this code if possible
+    (() => {
+      let elementsCount = 100
+      for (i = 0; i < elementsCount; i++) {
+        setTimeout(() => {
+          let el = document.createElement("div")
+          el.className = 'js-date-format'
+          el.innerHTML = (new Date()).toISOString()
+          document.body.appendChild(el)
+        }, i * 1000)
+      }
+    })();
+
+
+
+    var check = function () {
+        var dates =document.getElementsByClassName('js-date-format')
+        for (i in dates){
+            if(dates[i].dt){                
+                sec_ago = (Date.now() -new Date(dates[i].dt).getTime())/1000;
+            }else{             
+                sec_ago = (Date.now() -new Date(dates[i].innerHTML).getTime())/1000;
+                dates[i].dt = dates[i].innerHTML;
+            }            
+            sec_ago = sec_ago.toFixed(0);                    
+            // seconds
+            if(sec_ago < 60){
+                if (sec_ago <= 1){
+                    dates[i].innerHTML = sec_ago + " second ago";
+                }
+                else{
+                    dates[i].innerHTML = sec_ago + " seconds ago";
+                }
+            } else if (sec_ago < 3600) {//minutes
+                sec_ago = sec_ago/60;
+                sec_ago = sec_ago.toFixed(0);
+                if (sec_ago == 1){
+                    dates[i].innerHTML = sec_ago + " minute ago";
+                }
+                else{
+                    dates[i].innerHTML = sec_ago + " minutes ago";
+                }
+
+            } else if (sec_ago < 86400){//hours
+                sec_ago = sec_ago/60;
+                sec_ago = sec_ago.toFixed(0);
+                if (sec_ago == 1){
+                    dates[i].innerHTML = sec_ago + " hour ago";
+                }
+                else{
+                    dates[i].innerHTML = sec_ago + " hours ago";
+                }
+
+            } else { //days => show in original iso format
+                dates[i].innerHTML = dates[i].dt
+            }                
+
+        }
+                
+        setTimeout(check,1000);
+    }
+    check();        
+
+  </script>
+</body>
+</html>
